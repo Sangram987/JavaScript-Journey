@@ -1,0 +1,141 @@
+<!--Write a program in javascript to show total mark , average mark, percentage and pass or fail-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Status</title>
+    <style>
+       * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .card {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h1 {
+            font-size: 1.4rem;
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #357abd;
+        }
+
+        #data4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
+       
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h1>Hey! students, Check you Status</h1>
+        <form>
+            <span>English:</span>
+            <input type="text" placeholder="Enter english mark" id="mark1">
+            <br>
+            <br>
+            <span>Hindi:</span>
+            <input type="text" placeholder="Enter hindi mark" id="mark2">
+            <br>
+            <br>
+            <span>Science:</span>
+            <input type="text" placeholder="Enter science mark" id="mark3">
+            <br>
+            <br>
+            <span>Math:</span>
+            <input type="text" placeholder="Enter math mark" id="mark4">
+            <br>
+            <br>
+            <span>Physice: </span>
+            <input type="text" placeholder="Enter physics mark" id="mark5">
+            <br>
+            <br>
+            <button type="button" id="button" onclick="check()">Check</button>
+            <br>
+            <p id="data1"></p>
+            <p id="data2"></p>
+            <p id="data3"></p>
+            <p id="data4"></p>
+        </form>
+    </div>
+
+    <script>
+        function check() {
+            let a = parseInt(document.getElementById("mark1").value);
+            let b = parseInt(document.getElementById("mark2").value);
+            let c = parseInt(document.getElementById("mark3").value)
+            let d = parseInt(document.getElementById("mark4").value);
+            let e = parseInt(document.getElementById("mark5").value);
+
+            //Calculate Total.
+            let total = a + b + c + d + e;
+            document.getElementById("data1").innerHTML = "Total Mark: " + total;
+            // Find Average
+            let avg = total / 5;
+            document.getElementById("data2").innerText = "Average Mark: " + avg;
+
+            // Find Percentage
+            let perc = (total / 500) * 100;
+            document.getElementById("data3").innerText = "Total Percentage: " + perc + "%";
+
+            //Pass or fail.
+            if(perc >= 60) {
+                document.getElementById("data4").innerHTML = "First division with" + perc + "%";
+            }
+            else if(perc >= 45 && perc < 60) {
+                document.getElementById("data4").innerHTML = "Second division with" + perc + "%";
+            }
+            else if(perc >= 33 && perc < 45) {
+                document.getElementById("data4").innerHTML = "Third division with" + perc + "%";
+            }
+            else {
+                document.getElementById("data4").innerHTML = "You are fail with" + perc + "%";
+            }
+
+        }
+    </script>
+</body>
+
+</html>
