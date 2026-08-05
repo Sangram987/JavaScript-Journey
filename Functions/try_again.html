@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Try Again Game</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .game-card {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            width: 100%;
+            max-width: 380px;
+        }
+
+        h1 {
+            font-size: 1.4rem;
+            color: #1e293b;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        input {
+            padding: 12px;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 1rem;
+            text-align: center;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        input:focus {
+            border-color: #3b82f6;
+        }
+
+        button {
+            padding: 12px;
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #2563eb;
+        }
+
+        .message {
+            font-size: 1rem;
+            font-weight: 600;
+            min-height: 24px;
+        }
+
+        .success {
+            color: #16a34a;
+        }
+
+        .error {
+            color: #dc2626;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="game-card">
+        <h1>Welcome to the Guessing Game!</h1>
+        <div class="input-group">
+            <input type="number" id="userGuess" placeholder="Enter a number" placeholder="e.g. 10">
+            <button onclick="checkGuess()">Submit Guess</button>
+        </div>
+        <div id="message" class="message"></div>
+    </div>
+
+    <script>
+        const correctNum = 29;
+
+        function checkGuess() {
+            const inputField = document.getElementById("userGuess");
+            const messageElement = document.getElementById("message");
+            const userGuess = parseInt(inputField.value);
+
+            if (isNaN(userGuess)) {
+                messageElement.textContent = "Please enter a valid number!";
+                messageElement.className = "message error";
+                return;
+            }
+
+            if (userGuess === correctNum) {
+                messageElement.textContent = "You entered the correct number!";
+                messageElement.className = "message success";
+            } else {
+                messageElement.textContent = "Wrong number! Try again.";
+                messageElement.className = "message error";
+                inputField.value = "";
+                inputField.focus();
+            }
+        }
+    </script>
+</body>
+
+</html>
