@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Manager</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        p.subtitle {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-bottom: 24px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        input:focus {
+            border-color: #3b82f6;
+        }
+
+        button {
+            padding: 12px 20px;
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #2563eb;
+        }
+
+        button.reset-btn {
+            background-color: #e2e8f0;
+            color: #475569;
+            margin-top: 15px;
+            width: 100%;
+        }
+
+        button.reset-btn:hover {
+            background-color: #cbd5e1;
+        }
+
+        .array-display {
+            margin-top: 20px;
+            padding: 16px;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+        }
+
+        .array-display label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #64748b;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .array-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .badge {
+            background-color: #3b82f6;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            animation: popIn 0.2s ease;
+        }
+
+        .message {
+            margin-top: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            min-height: 20px;
+        }
+
+        .message.error {
+            color: #dc2626;
+        }
+
+        .message.info {
+            color: #0284c7;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Array Element Manager</h1>
+        <p class="subtitle">Enter numbers to push into the array. Enter 0 to stop.</p>
+
+        <div class="input-group">
+            <input type="number" id="numInput" placeholder="Enter a number">
+            <button onclick="addNumber()">Push</button>
+        </div>
+
+        <div id="msg" class="message"></div>
+
+        <div class="array-display">
+            <label>Current Array</label>
+            <div id="arrayItems" class="array-items"></div>
+        </div>
+
+        <button class="reset-btn" onclick="resetArray()">Reset Array</button>
+    </div>
+
+    <script>
+        let arr = [1, 2, 3, 4, 5, 6, 7];
+
+        function renderArray() {
+            const container = document.getElementById('arrayItems');
+            container.innerHTML = '';
+            arr.forEach(num => {
+                const badge = document.createElement('span');
+                badge.className = 'badge';
+                badge.textContent = num;
+                container.appendChild(badge);
+            });
+        }
+
+        function addNumber() {
+            const input = document.getElementById('numInput');
+            const msg = document.getElementById('msg');
+            const value = parseInt(input.value, 10);
+
+            if (isNaN(value)) {
+                msg.textContent = 'Please enter a valid number!';
+                msg.className = 'message error';
+                return;
+            }
+
+            if (value === 0) {
+                msg.textContent = 'Entered 0: Input sequence finished!';
+                msg.className = 'message info';
+                input.value = '';
+                return;
+            }
+
+            arr.push(value);
+            renderArray();
+            msg.textContent = `Added ${value} to array!`;
+            msg.className = 'message info';
+            input.value = '';
+            input.focus();
+        }
+
+        function resetArray() {
+            arr = [1, 2, 3, 4, 5, 6, 7];
+            renderArray();
+            const msg = document.getElementById('msg');
+            msg.textContent = 'Array reset to initial state.';
+            msg.className = 'message info';
+        }
+
+        // Render initial array on page load
+        renderArray();
+    </script>
+
+</body>
+
+</html>
