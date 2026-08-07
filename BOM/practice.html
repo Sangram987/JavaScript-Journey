@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Site Redirect Game</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        #container {
+            background: #ffffff;
+            padding: 32px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 1.4rem;
+            color: #1e293b;
+            margin-bottom: 16px;
+        }
+
+        .legend {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 14px;
+            margin-bottom: 20px;
+            text-align: left;
+            font-size: 0.88rem;
+            color: #475569;
+        }
+
+        .legend-title {
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+
+        .legend ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .legend li span {
+            font-weight: 600;
+            color: #2563eb;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #475569;
+        }
+
+        input {
+            padding: 12px;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        input:focus {
+            border-color: #3b82f6;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #2563eb;
+        }
+
+        #message {
+            margin-top: 16px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #dc2626;
+            min-height: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="container">
+        <h1>Multi-Site Redirect Game</h1>
+
+        <div class="legend">
+            <div class="legend-title">Redirection Thresholds:</div>
+            <ul>
+                <li>• Greater than <span>80</span> ➔ YouTube</li>
+                <li>• Greater than <span>60</span> ➔ Amazon</li>
+                <li>• Greater than <span>40</span> ➔ Flipkart</li>
+                <li>• Greater than <span>20</span> ➔ Google</li>
+            </ul>
+        </div>
+
+        <form id="form">
+            <div class="input-group">
+                <label for="num1">Enter a Number</label>
+                <input type="number" placeholder="Enter a number" id="num1">
+            </div>
+            <button type="button" id="btn" onclick="game()">Redirect Me</button>
+            <p id="message"></p>
+        </form>
+    </div>
+
+    <script>
+        function game() {
+            let num = parseFloat(document.getElementById("num1").value);
+            let messageElement = document.getElementById("message");
+
+            if (isNaN(num)) {
+                messageElement.textContent = "Please enter a valid number!";
+                return;
+            }
+
+            // Conditions checked from HIGHEST to LOWEST threshold
+            if (num > 80) {
+                window.location.href = "https://www.youtube.com";
+            } else if (num > 60) {
+                window.location.href = "https://www.amazon.com";
+            } else if (num > 40) {
+                window.location.href = "https://www.flipkart.com";
+            } else if (num > 20) {
+                window.location.href = "https://www.google.com";
+            } else {
+                messageElement.textContent = "Number must be greater than 20 to redirect!";
+            }
+        }
+    </script>
+
+</body>
+
+</html>
