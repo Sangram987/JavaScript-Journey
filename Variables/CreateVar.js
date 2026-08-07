@@ -23,8 +23,12 @@ console.log(PI);
 PI = 3.14;
 console.log(PI)  //Show TypeError
 
+
 //Q5:- Declare var x = 5 inside a block and print it outside the block. Observe the output.
 {
     var z = 5;
 }
 console.log(z);
+
+
+

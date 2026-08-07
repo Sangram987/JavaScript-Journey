@@ -11,7 +11,7 @@ title.style.color = "blue";
 
 
 //Q4:-Add a click event to the button.
-document.getElementById("title").addEventListener("mouseover", ()=> {
+document.getElementById("title").addEventListener("mouseover", () => {
     alert("You clicked the text.")
 })
 

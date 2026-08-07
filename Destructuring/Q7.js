@@ -4,7 +4,7 @@ const student = {
     age: 19
 };
 
-function display({name, age}) {
+function display({ name, age }) {
     console.log(name);
     console.log(age)
 }
