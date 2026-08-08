@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: whitesmoke;
+        }
+
+        .clock-card {
+            width: 380px;
+            background: #ffffff;
+            padding: 35px 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .clock-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+            background-color: #e0e0e0
+        }
+
+        .title {
+            font-size: 1.5rem;
+            color: #191970;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .time-display {
+            font-size: 3.2rem;
+            font-weight: bold;
+            color: #222;
+            letter-spacing: 2px;
+        }
+
+        .ampm {
+            font-size: 1rem;
+            color: #0077ff;
+            vertical-align: super;
+            margin-left: 5px;
+        }
+
+        .date-display {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .description {
+            margin-top: 18px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="clock-card">
+        <h2 class="title">Digital Clock</h2>
+
+        <div class="time-display">
+            <span id="hrs">00</span>:<span id="min">00</span>:<span id="sec">00</span>
+            <span class="ampm" id="ampm">AM</span>
+        </div>
+
+        <div class="date-display" id="date">Loading date...</div>
+
+        <p class="description">
+            A simple real-time digital clock built with HTML, CSS, and JavaScript.
+            It automatically updates the current time every second and displays the
+            current date in a clean and responsive design.
+        </p>
+    </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            let seconds = now.getSeconds();
+            let ampm = hours >= 12 ? 'PM' : 'AM';
+
+            hours = hours % 12;
+            hours = hours ? hours : 12;
+
+            document.getElementById('hrs').textContent = String(hours).padStart(2, '0');
+            document.getElementById('min').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('sec').textContent = String(seconds).padStart(2, '0');
+            document.getElementById('ampm').textContent = ampm;
+
+            const options = {
+                weekday: 'long',
+                month: 'long',
+                day: 'numeric',
+                year: 'numeric'
+            };
+
+            document.getElementById('date').textContent =
+                now.toLocaleDateString('en-US', options);
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+</body>
+
+</html>
