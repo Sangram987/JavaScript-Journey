@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jokes Generator</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 16px;
+            padding: 32px;
+            max-width: 550px;
+            width: 100%;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        .category-badge {
+            display: inline-block;
+            background-color: #3b82f6;
+            color: #ffffff;
+            font-size: 0.8rem;
+            font-weight: bold;
+            padding: 4px 12px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .joke-container {
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 24px;
+            font-size: 1.15rem;
+            line-height: 1.6;
+        }
+
+        .setup {
+            color: #e2e8f0;
+            margin-bottom: 12px;
+        }
+
+        .delivery {
+            color: #38bdf8;
+            font-weight: 600;
+        }
+
+        .single-joke {
+            color: #f1f5f9;
+        }
+
+        button {
+            background: linear-gradient(90deg, #6366f1, #8b5cf6);
+            color: #ffffff;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+        <span class="category-badge" id="category">Programming</span>
+        <div class="joke-container" id="joke">Loading joke...</div>
+        <button onclick="getJoke()">Get Another Joke</button>
+    </div>
+
+    <script>
+        const MyJokes = [
+            {
+                "category": "Programming",
+                "type": "twopart",
+                "setup": ".NET developers are picky when it comes to food.",
+                "delivery": "They only like chicken NuGet."
+            },
+            {
+                "category": "Programming",
+                "type": "single",
+                "joke": "There are only 10 kinds of people in this world: those who know binary and those who don't."
+            },
+            {
+                "category": "Programming",
+                "type": "twopart",
+                "setup": "What is a dying programmer's last program?",
+                "delivery": "Goodbye, world!"
+            },
+            {
+                "category": "Programming",
+                "type": "single",
+                "joke": "Java and C were telling jokes. It was C's turn, so he writes something on the wall, points to it and says \"Do you get the reference?\" But Java didn't."
+            },
+            {
+                "category": "Programming",
+                "type": "twopart",
+                "setup": "Why do they call it hyper terminal?",
+                "delivery": "Too much Java."
+            },
+            {
+                "category": "Programming",
+                "type": "single",
+                "joke": "A SQL statement walks into a bar and sees two tables. It approaches and asks \"May I join you?\""
+            },
+            {
+                "category": "Programming",
+                "type": "single",
+                "joke": "Knock knock.\nWho's there?\nRecursion.\nRecursion who?\nKnock knock."
+            },
+            {
+                "category": "Programming",
+                "type": "single",
+                "joke": "Changing random stuff until your program works is 'hacky' and a 'bad coding practice', but if you do it fast enough it's 'Machine Learning'."
+            },
+            {
+                "category": "Programming",
+                "type": "single",
+                "joke": "Programming is 10% science, 20% ingenuity, and 70% getting the ingenuity to work with the science."
+            },
+            {
+                "category": "Programming",
+                "type": "single",
+                "joke": "If Bill Gates had a dime for every time Windows crashed... Oh wait, he does."
+            },
+            {
+                "category": "Programming",
+                "type": "single",
+                "joke": "\"Knock, knock.\"\n\"Who's there?\"\n\n[very long pause]\n\n\"Java.\""
+            },
+            {
+                "category": "Programming",
+                "type": "single",
+                "joke": "A programmer puts two glasses on his bedside table before going to sleep: a full one in case he gets thirsty, and an empty one in case he doesn't."
+            },
+            {
+                "category": "Programming",
+                "type": "single",
+                "joke": "The six stages of debugging:\n1. That can't happen.\n2. That doesn't happen on my machine.\n3. That shouldn't happen.\n4. Why does that happen?\n5. Oh, I see.\n6. How did that ever work?"
+            },
+            {
+                "category": "Programming",
+                "type": "twopart",
+                "setup": "Why do programmers preferred dark mode?",
+                "delivery": "Because light attracts bugs!"
+            },
+            {
+                "category": "Programming",
+                "type": "twopart",
+                "setup": "What is the most used language in programming?",
+                "delivery": "Profanity."
+            },
+            {
+                "category": "Programming",
+                "type": "twopart",
+                "setup": "How do you tell an introverted computer scientist from an extroverted one?",
+                "delivery": "An extroverted computer scientist looks at YOUR shoes when talking to you."
+            },
+            {
+                "category": "Programming",
+                "type": "single",
+                "joke": "There's no place like 127.0.0.1"
+            },
+            {
+                "category": "Programming",
+                "type": "twopart",
+                "setup": "Why was the JavaScript developer sad?",
+                "delivery": "Because he didn't Node how to Express himself."
+            }
+        ];
+
+        function getJoke() {
+            const randomIndex = Math.floor(Math.random() * MyJokes.length);
+            const selectedJoke = MyJokes[randomIndex];
+
+            const jokeDisplay = document.getElementById("joke");
+            const categoryDisplay = document.getElementById("category");
+
+            categoryDisplay.textContent = selectedJoke.category;
+
+            if (selectedJoke.type === "twopart") {
+                jokeDisplay.innerHTML = `
+                    <p class="setup">${selectedJoke.setup}</p>
+                    <p class="delivery">${selectedJoke.delivery}</p>
+                `;
+            } else {
+                jokeDisplay.innerHTML = `<p class="single-joke">${selectedJoke.joke.replace(/\n/g, '<br>')}</p>`;
+            }
+        }
+
+        // Load an initial joke on page load
+        getJoke();
+    </script>
+</body>
+
+</html>
