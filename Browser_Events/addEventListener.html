@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventListener</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: whitesmoke;
+        }
+
+        #container {
+            width: 380px;
+            background: #ffffff;
+            padding: 35px 30px;
+            border-radius: 15px;
+            text-align: center;
+            height: 200px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #btn {
+            font-size: large;
+            border: none;
+            border-radius: 12px;
+            ;
+            height: 20vh;
+            background-color: blue;
+            color: white;
+            width: 250px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <button type="button" id="btn">Click</button>
+    </div>
+    <script>
+        let button = document.getElementById("btn");
+        button.addEventListener("click", (eve) => {
+            alert("Hey i am in eventListener.");
+            document.body.style.background = "red";
+        });
+    </script>
+</body>
+
+</html>
