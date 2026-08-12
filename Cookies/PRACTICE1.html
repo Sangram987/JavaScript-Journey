@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice cookie</title>
+</head>
+
+<body>
+    <script>
+        //Create a Cookie.
+        document.cookie = "username=Sangram";
+        console.log(document.cookie);
+    </script>
+
+    <script>
+        //Read Cookies.
+        document.cookie = "theme=dark";
+        document.cookie = "language=en";
+
+        console.log(document.cookie);
+    </script>
+    <script>
+        //Add Expiry Date.
+        const date = new Date();
+        date.setTime(date.getTime() + 24 * 60 * 60 * 1000);
+        document.cookie = `username=Sangram; expires=${date.toUTCString()}`;
+        console.log(document.cookie);
+    </script>
+
+    <script>
+        function getCookie(name) {
+            const cookies = document.cookie.split("; ");
+
+            for (let cookie of cookies) {
+                const [key, value] = cookie.split("=");
+
+                if (key === name) {
+                    return value;
+                }
+            }
+            return null;
+        }
+
+        document.cookie = "username=Sangram";
+        console.log(getCookie("username"));
+    </script>
+
+    <script>
+        document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+        console.log(document.cookie);
+    </script>
+</body>
+
+</html>
