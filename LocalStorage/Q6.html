@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store Login Information</title>
+</head>
+
+<body>
+    <script>
+        const login = {
+            email: "sangram@example.com",
+            isLoggedIn: true
+        };
+
+        localStorage.setItem("login", JSON.stringify(login));
+
+        const savedLogin = JSON.parse(localStorage.getItem("login"));
+
+        if (savedLogin.isLoggedIn) {
+            console.log(`Welcome ${savedLogin.email}`);
+        } F
+    </script>
+</body>
+
+</html>

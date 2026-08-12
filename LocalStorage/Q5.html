@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a counter that increases every time the page is refreshed and save the count in localStorage.</title>
+</head>
+
+<body>
+    <script>
+        let count = localStorage.getItem("refreshCount");
+
+        if (count === null) {
+            count = 1;
+        } else {
+            count = Number(count) + 1;
+        }
+
+        localStorage.setItem("refreshCount", count);
+        console.log(`Page refreshed ${count} times`);
+    </script>
+</body>
+
+</html>

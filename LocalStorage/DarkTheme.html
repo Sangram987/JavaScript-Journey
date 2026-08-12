@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Theme Toggle</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Default Light Mode */
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f4f6f8;
+            color: #1e293b;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 32px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        h2 {
+            margin-bottom: 12px;
+            font-size: 1.5rem;
+        }
+
+        p {
+            color: #64748b;
+            margin-bottom: 24px;
+            font-size: 0.95rem;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            background-color: #2563eb;
+            color: #ffffff;
+            font-size: 0.95rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #1d4ed8;
+        }
+
+        /* Dark Mode Classes */
+        body.dark-mode {
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+
+        body.dark-mode .card {
+            background-color: #1e293b;
+            border-color: #334155;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        body.dark-mode p {
+            color: #94a3b8;
+        }
+
+        body.dark-mode button {
+            background-color: #38bdf8;
+            color: #0f172a;
+        }
+
+        body.dark-mode button:hover {
+            background-color: #7dd3fc;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2 id="title">Light Theme</h2>
+        <p id="desc">Current mode is saved in LocalStorage.</p>
+        <button id="themeBtn" onclick="toggleTheme()">Switch to Dark Mode</button>
+    </div>
+
+    <script>
+        // 1. Check saved theme on page load
+        const savedTheme = localStorage.getItem("theme");
+
+        if (savedTheme === "dark") {
+            applyDarkMode();
+        }
+
+        // 2. Toggle theme function
+        function toggleTheme() {
+            const currentTheme = localStorage.getItem("theme");
+
+            if (currentTheme === "dark") {
+                applyLightMode();
+            } else {
+                applyDarkMode();
+            }
+        }
+
+        function applyDarkMode() {
+            document.body.classList.add("dark-mode");
+            document.getElementById("title").innerText = "Dark Theme";
+            document.getElementById("themeBtn").innerText = "Switch to Light Mode";
+            localStorage.setItem("theme", "dark");
+        }
+
+        function applyLightMode() {
+            document.body.classList.remove("dark-mode");
+            document.getElementById("title").innerText = "Light Theme";
+            document.getElementById("themeBtn").innerText = "Switch to Dark Mode";
+            localStorage.setItem("theme", "light");
+        }
+    </script>
+</body>
+</html>
